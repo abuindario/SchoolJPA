@@ -17,4 +17,5 @@ import lombok.Setter;
 public class Student extends Personal {
 	@OneToMany (mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Student_Subject> subjects = new ArrayList<>();
+	private int absence;
 }
