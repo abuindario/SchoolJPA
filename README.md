@@ -13,5 +13,3 @@ it works without mistakes and, for so, username and password of the database con
 Functionalities: 
 - The program won't let the user to set blank names to new/existent teachers, subjects or students. 
 - The program won't let the user to assing twice a student to a subject. 
-
-Please, if any error is detected while running this program, let me know: darioabuin@outlook.com
