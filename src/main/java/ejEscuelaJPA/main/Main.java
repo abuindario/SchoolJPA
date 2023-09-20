@@ -11,6 +11,7 @@ import ejEscuelaJPA.BO.Student_SubjectBO;
 import ejEscuelaJPA.BO.SubjectBO;
 import ejEscuelaJPA.BO.TeacherBO;
 import ejEscuelaJPA.entities.Student;
+import ejEscuelaJPA.entities.Student_Subject;
 import ejEscuelaJPA.entities.Subject;
 import ejEscuelaJPA.entities.Teacher;
 
@@ -112,7 +113,13 @@ public class Main {
 		System.out.println("Teacher list:");
 		while (teacherIterator.hasNext()) {
 			Teacher teacher = teacherIterator.next();
-			System.out.println("\t" + teacher.getId() + ". " + teacher.getName());
+			System.out.println("\t" + teacher.getId() + ". " + teacher.getName() + "\n\t\tSubjects:");
+			List<Subject> subjects = teacher.getSubjects();
+			Iterator<Subject> it = subjects.iterator();
+			while(it.hasNext()) {
+				Subject subject = it.next();
+				System.out.println("\t\t" + subject.getId() + ". " + subject.getName());
+			}
 		}
 	}
 
@@ -149,8 +156,13 @@ public class Main {
 		System.out.println("Student list:");
 		while (studentIterator.hasNext()) {
 			Student student = studentIterator.next();
-			System.out
-					.println("\t" + student.getId() + ". " + student.getName() + ", absences: " + student.getAbsence());
+			System.out.println("\t" + student.getId() + ". " + student.getName() + ", absences: " + student.getAbsence() + "\n\t\tSubjects:");
+			List<Student_Subject> studentSubjects = student.getSubjects();
+			Iterator<Student_Subject> it = studentSubjects.iterator();
+			while (it.hasNext()) {
+				Subject subject = it.next().getSubject();
+				System.out.println("\t\t" + subject.getId() + ". " + subject.getName() );
+			}
 		}
 	}
 
@@ -194,7 +206,13 @@ public class Main {
 			} catch (NullPointerException e) {
 				teacherName = "'none'";
 			}
-			System.out.println("\t" + subject.getId() + ". " + subject.getName() + ", Teacher: " + teacherName);
+			System.out.println("\t" + subject.getId() + ". " + subject.getName() + ", Teacher: " + teacherName + "\n\t\t Students:");
+			List<Student_Subject> studentSubject = subject.getStudents();
+			Iterator<Student_Subject> it = studentSubject.iterator();
+			while (it.hasNext()) {
+				Student student = it.next().getStudent();
+				System.out.println("\t\t" + student.getId() + ". " + student.getName());
+			}
 		}
 	}
 
@@ -237,4 +255,5 @@ public class Main {
 		int studentId = Integer.parseInt(br.readLine());
 		student_subjectBO.setStudent(subjectId, studentId);
 	}
+	
 }

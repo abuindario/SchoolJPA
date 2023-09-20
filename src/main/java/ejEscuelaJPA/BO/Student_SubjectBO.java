@@ -22,4 +22,5 @@ public class Student_SubjectBO {
 		em.getTransaction().commit();
 		em.close();
 	}
+
 }
