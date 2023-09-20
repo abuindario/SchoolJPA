@@ -8,7 +8,7 @@ The program is designed to be used on the IDE Console.
 This program simulates a school, where the user can take control over the Entities: Students, Subjects and Teachers. It is possible to create, read, update and delete every 
 instance of an object.
 Sample Students, Subjects and Teachers are provided by default, the program is connected to an online database (freesqldatabase.com). The aim of this project is to show that 
-it works without mistakes, and for so username and password of the database connection are visible to everyone. Please, don't do any harm.
+it works without mistakes and, for so, username and password of the database connection are visible to everyone. Please, don't do any harm.
 
 Functionalities: 
 - The program won't let the user to set blank names to new/existent teachers, subjects or students. 
