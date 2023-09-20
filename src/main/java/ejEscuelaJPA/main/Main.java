@@ -206,8 +206,13 @@ public class Main {
 				System.out.println("Please, enter a valid name");
 			}
 		} while (studentName.trim().equals(""));
+		int studentAbsences = 99;
+		do {
+			System.out.println("Enter student absences: ");
+			studentAbsences = Integer.parseInt(br.readLine());
+		} while(studentAbsences == 99);
 		try {
-			studentBO.update(studentId, studentName);
+			studentBO.update(studentId, studentName, studentAbsences);
 		} catch (NullPointerException e) {
 			System.out.println("Invalid option, enter a valid Student ID");
 		}

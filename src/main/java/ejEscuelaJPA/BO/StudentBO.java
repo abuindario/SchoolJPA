@@ -26,12 +26,13 @@ public class StudentBO {
 		return studentList;
 	}
 	
-	public void update(int studentId, String studentName) {
+	public void update(int studentId, String studentName, int studentAbsences) {
 		EntityManager em = EntityManagerSingleton.getEntityManager();
 		em.getTransaction().begin();
 		StudentDAO studentDAO = new StudentDAO();
 		Student student = em.find(Student.class, studentId);
 		student.setName(studentName);
+		student.setAbsence(studentAbsences);
 		studentDAO.update(em, student);
 		em.getTransaction().commit();
 		em.close();
