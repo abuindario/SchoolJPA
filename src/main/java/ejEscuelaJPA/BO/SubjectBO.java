@@ -26,7 +26,7 @@ public class SubjectBO {
 		em.close();
 		return subjectList;
 	}
-	
+
 	public void update(int subjectId, String subjectName) {
 		EntityManager em = EntityManagerSingleton.getEntityManager();
 		em.getTransaction().begin();
@@ -37,7 +37,7 @@ public class SubjectBO {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
+
 	public void delete(int subjectId) {
 		EntityManager em = EntityManagerSingleton.getEntityManager();
 		em.getTransaction().begin();
@@ -47,17 +47,29 @@ public class SubjectBO {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
+
 	public void setTeacher(int subjectId, int teacherId) {
 		EntityManager em = EntityManagerSingleton.getEntityManager();
 		em.getTransaction().begin();
 		SubjectDAO subjectDAO = new SubjectDAO();
-		Subject subject = em.find(Subject.class, subjectId);
+		Subject subject = null;
+		subject = em.find(Subject.class, subjectId);
 		Teacher teacher = em.find(Teacher.class, teacherId);
-		subject.setTeacher(teacher);
-		subjectDAO.setTeacher(em, subject);
+		try {
+		if(teacher.equals(null)) {
+			throw new NullPointerException();
+		}
+		} catch (NullPointerException e) {
+			System.out.println("Enter a valid Teacher ID");
+		}
+		try {
+			subject.setTeacher(teacher);
+			subjectDAO.setTeacher(em, subject);
+		} catch (NullPointerException e) {
+			System.out.println("Enter a valid Subject ID");
+		}
 		em.getTransaction().commit();
 		em.close();
 	}
-	
+
 }

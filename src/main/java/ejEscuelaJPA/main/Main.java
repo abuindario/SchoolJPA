@@ -100,8 +100,14 @@ public class Main {
 
 	public static void createTeacher() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Enter teacher name:");
-		String teacherName = br.readLine();
+		String teacherName = "";
+		do {
+			System.out.println("Enter teacher name: ");
+			teacherName = br.readLine();
+			if (teacherName.trim().equals("")) {
+				System.out.println("Please, enter a valid name");
+			}
+		} while (teacherName.trim().equals(""));
 		Teacher teacher = new Teacher();
 		teacher.setName(teacherName);
 		teacherBO.insert(teacher);
@@ -132,7 +138,7 @@ public class Main {
 		do {
 			System.out.println("Enter teacher name: ");
 			teacherName = br.readLine();
-			if(teacherName.trim().equals("")) {
+			if (teacherName.trim().equals("")) {
 				System.out.println("Please, enter a valid name");
 			}
 		} while (teacherName.trim().equals(""));
@@ -157,8 +163,14 @@ public class Main {
 
 	public static void createStudent() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Enter student name:");
-		String studentName = br.readLine();
+		String studentName = "";
+		do {
+			System.out.println("Enter student name: ");
+			studentName = br.readLine();
+			if (studentName.trim().equals("")) {
+				System.out.println("Please, enter a valid name");
+			}
+		} while (studentName.trim().equals(""));
 		Student student = new Student();
 		student.setName(studentName);
 		studentBO.insert(student);
@@ -186,9 +198,19 @@ public class Main {
 		System.out.println("Enter 'ID' from student to update: ");
 		getStudentList();
 		int studentId = Integer.parseInt(br.readLine());
-		System.out.println("Enter student name: ");
-		String studentName = br.readLine();
-		studentBO.update(studentId, studentName);
+		String studentName = "";
+		do {
+			System.out.println("Enter student name: ");
+			studentName = br.readLine();
+			if (studentName.trim().equals("")) {
+				System.out.println("Please, enter a valid name");
+			}
+		} while (studentName.trim().equals(""));
+		try {
+			studentBO.update(studentId, studentName);
+		} catch (NullPointerException e) {
+			System.out.println("Invalid option, enter a valid Student ID");
+		}
 	}
 
 	public static void deleteStudent() throws NumberFormatException, IOException {
@@ -196,13 +218,23 @@ public class Main {
 		System.out.println("Enter 'ID' from student to remove: ");
 		getStudentList();
 		int studentId = Integer.parseInt(br.readLine());
-		studentBO.delete(studentId);
+		try {
+			studentBO.delete(studentId);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Invalid option, enter a valid Teacher ID");
+		}
 	}
 
 	public static void createSubject() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Enter subject name:");
-		String subjectName = br.readLine();
+		String subjectName = "";
+		do {
+			System.out.println("Enter subject name: ");
+			subjectName = br.readLine();
+			if (subjectName.trim().equals("")) {
+				System.out.println("Please, enter a valid name");
+			}
+		} while (subjectName.trim().equals(""));
 		Subject subject = new Subject();
 		subject.setName(subjectName);
 		subjectBO.insert(subject);
@@ -237,9 +269,19 @@ public class Main {
 		System.out.println("Enter 'ID' from subject to update: ");
 		getSubjectList();
 		int subjectId = Integer.parseInt(br.readLine());
-		System.out.println("Enter subject name: ");
-		String subjectName = br.readLine();
-		subjectBO.update(subjectId, subjectName);
+		String subjectName = "";
+		do {
+			System.out.println("Enter subject name: ");
+			subjectName = br.readLine();
+			if (subjectName.trim().equals("")) {
+				System.out.println("Please, enter a valid name");
+			}
+		} while (subjectName.trim().equals(""));
+		try {
+			subjectBO.update(subjectId, subjectName);
+		} catch (NullPointerException e) {
+			System.out.println("Invalid option, enter a valid Subject ID");
+		}
 	}
 
 	public static void deleteSubject() throws NumberFormatException, IOException {
@@ -247,7 +289,11 @@ public class Main {
 		System.out.println("Enter 'ID' from subject to remove: ");
 		getSubjectList();
 		int subjectId = Integer.parseInt(br.readLine());
-		subjectBO.delete(subjectId);
+		try {
+			subjectBO.delete(subjectId);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Invalid option, enter a valid Subject ID");
+		}
 	}
 
 	public static void setTeacher() throws NumberFormatException, IOException {
