@@ -315,7 +315,10 @@ public class Main {
 		System.out.println("Enter 'ID' from student of the subject: ");
 		getStudentList();
 		int studentId = Integer.parseInt(br.readLine());
-		student_subjectBO.setStudent(subjectId, studentId);
+		try {
+			student_subjectBO.setStudent(subjectId, studentId);
+		} catch (NullPointerException e) {
+		}
 	}
 
 }
