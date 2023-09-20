@@ -19,7 +19,7 @@ public class Main {
 	public static TeacherBO teacherBO = new TeacherBO();
 	public static StudentBO studentBO = new StudentBO();
 	public static SubjectBO subjectBO = new SubjectBO();
-	public static Student_SubjectBO student_subjectBO =  new Student_SubjectBO();
+	public static Student_SubjectBO student_subjectBO = new Student_SubjectBO();
 
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -116,7 +116,7 @@ public class Main {
 			System.out.println("\t" + teacher.getId() + ". " + teacher.getName() + "\n\t\tSubjects:");
 			List<Subject> subjects = teacher.getSubjects();
 			Iterator<Subject> it = subjects.iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				Subject subject = it.next();
 				System.out.println("\t\t" + subject.getId() + ". " + subject.getName());
 			}
@@ -128,9 +128,19 @@ public class Main {
 		System.out.println("Enter 'ID' from teacher to update: ");
 		getTeacherList();
 		int teacherId = Integer.parseInt(br.readLine());
-		System.out.println("Enter teacher name: ");
-		String teacherName = br.readLine();
-		teacherBO.update(teacherId, teacherName);
+		String teacherName = "";
+		do {
+			System.out.println("Enter teacher name: ");
+			teacherName = br.readLine();
+			if(teacherName.trim().equals("")) {
+				System.out.println("Please, enter a valid name");
+			}
+		} while (teacherName.trim().equals(""));
+		try {
+			teacherBO.update(teacherId, teacherName);
+		} catch (NullPointerException e) {
+			System.out.println("Invalid option, enter a valid Teacher ID");
+		}
 	}
 
 	public static void deleteTeacher() throws NumberFormatException, IOException {
@@ -138,7 +148,11 @@ public class Main {
 		System.out.println("Enter 'ID' from teacher to remove: ");
 		getTeacherList();
 		int teacherId = Integer.parseInt(br.readLine());
-		teacherBO.delete(teacherId);
+		try {
+			teacherBO.delete(teacherId);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Invalid option, enter a valid Teacher ID");
+		}
 	}
 
 	public static void createStudent() throws IOException {
@@ -156,12 +170,13 @@ public class Main {
 		System.out.println("Student list:");
 		while (studentIterator.hasNext()) {
 			Student student = studentIterator.next();
-			System.out.println("\t" + student.getId() + ". " + student.getName() + ", absences: " + student.getAbsence() + "\n\t\tSubjects:");
+			System.out.println("\t" + student.getId() + ". " + student.getName() + ", absences: " + student.getAbsence()
+					+ "\n\t\tSubjects:");
 			List<Student_Subject> studentSubjects = student.getSubjects();
 			Iterator<Student_Subject> it = studentSubjects.iterator();
 			while (it.hasNext()) {
 				Subject subject = it.next().getSubject();
-				System.out.println("\t\t" + subject.getId() + ". " + subject.getName() );
+				System.out.println("\t\t" + subject.getId() + ". " + subject.getName());
 			}
 		}
 	}
@@ -206,7 +221,8 @@ public class Main {
 			} catch (NullPointerException e) {
 				teacherName = "'none'";
 			}
-			System.out.println("\t" + subject.getId() + ". " + subject.getName() + ", Teacher: " + teacherName + "\n\t\t Students:");
+			System.out.println("\t" + subject.getId() + ". " + subject.getName() + ", Teacher: " + teacherName
+					+ "\n\t\t Students:");
 			List<Student_Subject> studentSubject = subject.getStudents();
 			Iterator<Student_Subject> it = studentSubject.iterator();
 			while (it.hasNext()) {
@@ -244,7 +260,7 @@ public class Main {
 		int teacherId = Integer.parseInt(br.readLine());
 		subjectBO.setTeacher(subjectId, teacherId);
 	}
-	
+
 	public static void setStudent() throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter 'ID' from subject to set student: ");
@@ -255,5 +271,5 @@ public class Main {
 		int studentId = Integer.parseInt(br.readLine());
 		student_subjectBO.setStudent(subjectId, studentId);
 	}
-	
+
 }
