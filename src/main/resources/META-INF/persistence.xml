@@ -8,9 +8,9 @@
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ejescuelajpa?serverTimezone=UTC" />
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://sql8.freesqldatabase.com:3306/sql8647807?serverTimezone=UTC" />
+			<property name="javax.persistence.jdbc.user" value="sql8647807" />
+			<property name="javax.persistence.jdbc.password" value="RY5DyCVW4S" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
 
